@@ -12,11 +12,17 @@ public class GanLazer : MonoBehaviour
     [SerializeField] private Transform EndGan;
     [SerializeField] private LineRenderer laser;
     [SerializeField] private float NextFire;
+    [SerializeField] private float Damage=0.2f;
     [SerializeField] private WaitForSeconds LaserTime = new WaitForSeconds(0.05f);
     private RaycastHit hit;
     private Ray ray;
+
+
+    [SerializeField] GameObject Player;
+    HpBar playerController;
     private void Start()
     {
+        playerController = Player.GetComponent<HpBar>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -53,9 +59,7 @@ public class GanLazer : MonoBehaviour
                 GanActiveFalse();
                 if (hit.collider.gameObject)
                 {
-                    Destroy(hit.collider.gameObject);
-
-
+                    playerController.PlayerDamageFromGan();
                 }
             }
             }
