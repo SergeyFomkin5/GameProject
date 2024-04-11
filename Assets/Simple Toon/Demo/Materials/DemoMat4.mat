@@ -38,7 +38,7 @@ Material:
         m_Offset: {x: 1.14, y: -2.74}
     m_Floats:
     - _AlphaClip: 0
-    - _AmbientCol: 0
+    - _AmbientCol: 0.099
     - _AttenPlus: 0
     - _Blend: 0
     - _Brightness: 0
@@ -70,13 +70,13 @@ Material:
     - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
     - _Lum: 1
-    - _Lumin: 0
+    - _Lumin: 0.29
     - _MaxAtten: 0
     - _MaxLight: 1
     - _MaxShade: 1
-    - _MinLight: 0
+    - _MinLight: 0.285
     - _MinShade: 0.754
-    - _Offset: 1.1
+    - _Offset: 0.14
     - _OutWidth: 1
     - _Outline: 1
     - _Overlap: 0
@@ -101,10 +101,10 @@ Material:
     - _ShdSmooth: 0
     - _Shine: 1.03
     - _Shiness: 0.97
-    - _ShnIntense: 0
+    - _ShnIntense: 0.127
     - _ShnOverlap: 0
-    - _ShnRange: 0.491
-    - _ShnSmooth: 1
+    - _ShnRange: 0.649
+    - _ShnSmooth: 0.707
     - _Smooth: 0.595
     - _SpcIntence: 0
     - _SpcLimit: 0
@@ -115,8 +115,8 @@ Material:
     - _SpcTolerc: 0.105
     - _SpecularEnabled: 0
     - _SrcBlend: 1
-    - _Steps: 23.3
-    - _StpSmooth: 0
+    - _Steps: 23
+    - _StpSmooth: 1
     - _Strength: 1
     - _Surface: 0
     - _TextureBlendingMode: 0
@@ -129,7 +129,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AmbientColor: {r: 1, g: 0.740566, b: 0.740566, a: 1}
-    - _Color: {r: 0.4666667, g: 1, b: 0.59295946, a: 1}
+    - _Color: {r: 0.50462794, g: 0.8490566, b: 0.58567, a: 1}
     - _ColorDim: {r: 1, g: 0.5424528, b: 0.5424528, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _ColorDimExtra: {r: 1, g: 0.5424528, b: 0.5424528, a: 1}
@@ -146,4 +146,3 @@ Material:
     - _SpcColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 0.8962264, g: 0.32551616, b: 0.32551616, a: 1}
     - _UnityShadowColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
-  m_BuildTextureStacks: []

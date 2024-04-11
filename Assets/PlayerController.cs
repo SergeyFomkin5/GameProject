@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -54,32 +52,6 @@ public class PlayerController : MonoBehaviour
         {
             _fallVelocity = -_jumpForce;
         }
-        Tackle();
         }
-    public int clicked = 0;
-    float time;
-
-    void Tackle()
-    {
-        time+=Time.deltaTime;
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            _moveVector += transform.forward * 2;
-        }
-        if(clicked ==2)
-        {
-           
-        }
-        if (clicked == 3)
-        {
-            clicked = 0;
-        }
-            if (time>0.2)
-        {
-            clicked = 0;
-            time = 0;
-        }
-    }
-
 
 }
