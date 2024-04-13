@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1623240506}
-  m_IndirectSpecularColor: {r: 0.20929429, g: 0.24737868, b: 0.2959827, a: 1}
+  m_IndirectSpecularColor: {r: 0.20929441, g: 0.247379, b: 0.29598284, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6410,7 +6410,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh113246
+  m_Name: pb_Mesh-44034
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8790,7 +8790,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3783c9635bdccf043b34fad9caec2f9e, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20561,7 +20561,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh114446
+  m_Name: pb_Mesh-44036
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20724,7 +20724,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh112940
+  m_Name: pb_Mesh-44044
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -46070,6 +46070,23 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2115979095}
+    - target: {fileID: 2907185549956875290, guid: beeff9d426de6c54693ba6fb0bef178c,
+        type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: df1ced6e58e5f73459c6ecc2bbdd3991,
+        type: 2}
+    - target: {fileID: 2907185549956875291, guid: beeff9d426de6c54693ba6fb0bef178c,
+        type: 3}
+      propertyPath: m_Resources
+      value: 
+      objectReference: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4,
+        type: 2}
+    - target: {fileID: 2907185549956875291, guid: beeff9d426de6c54693ba6fb0bef178c,
+        type: 3}
+      propertyPath: volumeTrigger
+      value: 
+      objectReference: {fileID: 2907185549812452954}
     - target: {fileID: 2907185550054127513, guid: beeff9d426de6c54693ba6fb0bef178c,
         type: 3}
       propertyPath: GanShopBar
@@ -46102,6 +46119,12 @@ PrefabInstance:
       objectReference: {fileID: 2123774232}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beeff9d426de6c54693ba6fb0bef178c, type: 3}
+--- !u!4 &2907185549812452954 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1117567831163386405, guid: beeff9d426de6c54693ba6fb0bef178c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2907185549812452953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!33 &2920668241524254380
 MeshFilter:
   m_ObjectHideFlags: 0
