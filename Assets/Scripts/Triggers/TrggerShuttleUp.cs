@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class TrggerShuttleUp : MonoBehaviour
 {
-    [SerializeField] private Transform PlayerPosition;
+    [SerializeField] private GameObject PlayerPosition;
     [SerializeField] private Transform TargetPlayerPosition;
+
+    [SerializeField] private WaitForSeconds PlayerControllerBoolTimer = new WaitForSeconds(0.1f);
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -12,8 +15,15 @@ public class TrggerShuttleUp : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 Debug.Log("1");
-                PlayerPosition.position = TargetPlayerPosition.position;
+                StartCoroutine(PlayerControllerBool());
+                PlayerPosition.transform.position = TargetPlayerPosition.position;
             }
         }
+    }
+    IEnumerator PlayerControllerBool()
+    {
+        PlayerPosition.GetComponent<PlayerController>().enabled = false;
+        yield return PlayerControllerBoolTimer;
+        PlayerPosition.GetComponent<PlayerController>().enabled = true;
     }
 }

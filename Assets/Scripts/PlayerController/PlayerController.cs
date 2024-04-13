@@ -11,18 +11,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpForce;
     void Start()
     {
-       _characterController=GetComponent<CharacterController>(); 
+       _characterController=GetComponent<CharacterController>();
     }
     void Update()
     {
         PlayerManager();
+
     }
     private void FixedUpdate()
     {
 
         _fallVelocity += _gravity * Time.fixedDeltaTime;
-        _characterController.Move(_moveVector * _playerSpeed * Time.fixedDeltaTime);
-        _characterController.Move(Vector3.down * _fallVelocity * Time.fixedDeltaTime);
+        _characterController.Move(_moveVector * _playerSpeed* Time.fixedDeltaTime);
+        _characterController.Move(Vector3.down * _fallVelocity* Time.fixedDeltaTime);
         if (_characterController.isGrounded)
         {
             _fallVelocity = 0;
