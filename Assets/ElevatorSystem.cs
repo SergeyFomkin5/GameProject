@@ -18,7 +18,6 @@ public class ElevatorSystem : MonoBehaviour
             Player.transform.position = new Vector3(Player.transform.position.x, TargetPositionPlayer.position.y, Player.transform.position.z);
             if (Input.GetKeyDown(KeyCode.E))
             {
-                PlayerControllerBool();
                 if (MoveElevator == true)
                 {
                     MoveElevator = false;
@@ -28,10 +27,6 @@ public class ElevatorSystem : MonoBehaviour
                     MoveElevator = true;
                 }
             }
-        }
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            MoveElevator = true;
         }
         if (MoveElevator == true)
         {
@@ -49,14 +44,7 @@ public class ElevatorSystem : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("1");
             ActiveTargetPlayer = true;
         }
-    }
-    IEnumerator PlayerControllerBool()
-    {
-        Player.GetComponent<PlayerController>().enabled = false;
-        yield return PlayerControllerBoolTimer;
-        Player.GetComponent<PlayerController>().enabled = true;
     }
 }
