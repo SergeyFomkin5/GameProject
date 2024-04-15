@@ -1,58 +1,79 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController _characterController;
-    private Vector3 _moveVector;
 
-    [SerializeField] private float _playerSpeed;
-    [SerializeField] private float _fallVelocity;
-    [SerializeField] private float _gravity;
-    [SerializeField] private float _jumpForce;
+    [SerializeField] private float speed = 1.5f;
+
+    [SerializeField] private Transform head;
+
+    [SerializeField] private float sensitivity = 5f; // чувствительность мыши
+    [SerializeField] private float headMinY = -40f; // ограничение угла для головы
+    [SerializeField] private float headMaxY = 40f;
+
+    [SerializeField] private KeyCode jumpButton = KeyCode.Space; // клавиша для прыжка
+    [SerializeField] private float jumpForce = 10; // сила прыжка
+    [SerializeField] private float jumpDistance = 1.2f; // расстояние от центра объекта, до поверхности
+
+    [SerializeField] private  Vector3 direction;
+    [SerializeField] private  float h, v;
+    [SerializeField] private  int layerMask;
+    [SerializeField] private  Rigidbody body;
+    [SerializeField] private float rotationY;
+
     void Start()
     {
-       _characterController=GetComponent<CharacterController>();
+        body = GetComponent<Rigidbody>();
+        body.freezeRotation = true;
     }
+
+    void FixedUpdate()
+    {
+        body.AddForce(direction * speed, ForceMode.VelocityChange);
+
+        // Ограничение скорости, иначе объект будет постоянно ускоряться
+        if (Mathf.Abs(body.velocity.x) > speed)
+        {
+            body.velocity = new Vector3(Mathf.Sign(body.velocity.x) * speed, body.velocity.y, body.velocity.z);
+        }
+        if (Mathf.Abs(body.velocity.z) > speed)
+        {
+            body.velocity = new Vector3(body.velocity.x, body.velocity.y, Mathf.Sign(body.velocity.z) * speed);
+        }
+    }
+
+    bool GetJump() // проверяем, есть ли коллайдер под ногами
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out hit, jumpDistance, layerMask))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     void Update()
     {
-        PlayerManager();
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
 
-    }
-    private void FixedUpdate()
-    {
+        direction = new Vector3(h, 0, v);
+        direction = head.TransformDirection(direction);
+        direction = new Vector3(direction.x, 0, direction.z);
 
-        _fallVelocity += _gravity * Time.fixedDeltaTime;
-        _characterController.Move(_moveVector * _playerSpeed* Time.fixedDeltaTime);
-        _characterController.Move(Vector3.down * _fallVelocity* Time.fixedDeltaTime);
-        if (_characterController.isGrounded)
+        if (Input.GetKeyDown(jumpButton) && GetJump())
         {
-            _fallVelocity = 0;
-
+            body.velocity = new Vector2(0, jumpForce);
         }
     }
-    void PlayerManager()
-    {
-        _moveVector = Vector3.zero;
-        if (Input.GetKey(KeyCode.W))
-        {
-            _moveVector += transform.forward;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            _moveVector -= transform.forward;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            _moveVector += transform.right;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            _moveVector -= transform.right;
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded)
-        {
-            _fallVelocity = -_jumpForce;
-        }
-        }
 
+    void OnDrawGizmosSelected() // подсветка, для визуальной настройки jumpDistance
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, Vector3.down * jumpDistance);
+    }
 }
