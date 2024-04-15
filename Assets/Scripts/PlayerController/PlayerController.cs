@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 
@@ -21,12 +22,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private  float h, v;
     [SerializeField] private  int layerMask;
     [SerializeField] private  Rigidbody body;
-    [SerializeField] private float rotationY;
+    [SerializeField] private  float rotationY;
 
     void Start()
     {
         body = GetComponent<Rigidbody>();
         body.freezeRotation = true;
+        layerMask = 5;
     }
 
     void FixedUpdate()
@@ -61,6 +63,13 @@ public class PlayerController : MonoBehaviour
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
+        // управление головой (камерой)
+        float rotationX = head.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
+        rotationY += Input.GetAxis("Mouse Y") * sensitivity;
+        rotationY = Mathf.Clamp(rotationY, headMinY, headMaxY);
+        head.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+
+        // вектор направления движения
         direction = new Vector3(h, 0, v);
         direction = head.TransformDirection(direction);
         direction = new Vector3(direction.x, 0, direction.z);
