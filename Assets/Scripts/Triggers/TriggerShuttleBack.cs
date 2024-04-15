@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class TriggerShuttleBack : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject PlayerPosition;
+    [SerializeField] private Transform TargetPlayerPosition;
+    private void OnTriggerStay(Collider other)
     {
-        
+        if (other.gameObject.tag == "Player")
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                PlayerPosition.transform.position = TargetPlayerPosition.position;
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
         body.freezeRotation = true;
-        layerMask = 5;
+        layerMask = 3;
     }
 
     void FixedUpdate()
