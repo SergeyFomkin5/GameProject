@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private  Rigidbody body;
     [SerializeField] private  float rotationY;
 
+    [SerializeField] private bool ActiveDrag;
+    [SerializeField] private bool ActiveMove;
+
     void Start()
     {
         body = GetComponent<Rigidbody>();
@@ -62,7 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
-
+        SystemRun();
         // управление головой (камерой)
         float rotationX = head.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
         rotationY += Input.GetAxis("Mouse Y") * sensitivity;
@@ -73,7 +76,6 @@ public class PlayerController : MonoBehaviour
         direction = new Vector3(h, 0, v);
         direction = head.TransformDirection(direction);
         direction = new Vector3(direction.x, 0, direction.z);
-
         if (Input.GetKeyDown(jumpButton) && GetJump())
         {
             body.velocity = new Vector2(0, jumpForce);
@@ -84,5 +86,54 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, Vector3.down * jumpDistance);
+    }
+    void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.layer==1)
+        {
+            body.drag = 15;
+            ActiveDrag=true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer==1)
+        {
+            body.drag = 0;
+            ActiveDrag = false;
+        }
+    }
+    void SystemRun()
+    {
+        if (Input.GetKey(KeyCode.W) || (Input.GetKey(KeyCode.A) || (Input.GetKey(KeyCode.S) || (Input.GetKey(KeyCode.D)))))
+        {
+            ActiveMove = true;
+            if (!Input.GetKey(KeyCode.LeftShift) && ActiveDrag == true)
+            {
+                body.drag = 15;
+            }
+            else
+            {
+                body.drag = 0;
+            }
+            if (Input.GetKey(KeyCode.LeftShift) && ActiveDrag == true)
+            {
+                speed = 9;
+            }
+            if (ActiveDrag == false || Input.GetKeyUp(KeyCode.LeftShift) && ActiveMove == false)
+            {
+                speed = 7;
+            }
+        }
+        else
+        {
+            ActiveMove = false;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed = 7;
+        }
+
+
     }
 }
