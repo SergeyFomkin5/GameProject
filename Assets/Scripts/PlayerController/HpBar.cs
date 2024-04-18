@@ -9,8 +9,4 @@ public class HpBar : MonoBehaviour
     {
        HpBarImage.fillAmount-=0.1f*Time.deltaTime;
     }
-    public void PlayerDamageFromGan() 
-    {
-        HpBarImage.fillAmount -= 0.1f;
-    }
 }

@@ -3,16 +3,28 @@
 public class TriggersWaterDamagePlayer : MonoBehaviour
 {
     [SerializeField] private GameObject Player;
-    HpBar playerController;
+     HpBar playerController;
+    [SerializeField] private Rigidbody body;
+    [SerializeField] private GameObject ImageWater;
 
-    
-
-        private void OnTriggerStay(Collider other)
+    private void Start()
+    {
+        playerController = Player.GetComponent<HpBar>();
+        ImageWater.SetActive(false);
+    }
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            playerController = Player.GetComponent<HpBar>();
-
+            if(Player.transform.position.y < 86)
+            {
+                ImageWater.SetActive(true);
+            }
+            else
+            {
+                ImageWater.SetActive(false);
+            }
+            body.drag = 5;
             playerController.PlayerDamageFromWater();
         }
     }

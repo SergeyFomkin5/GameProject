@@ -59,7 +59,6 @@ public class GanLazer : MonoBehaviour
                 GanActiveFalse();
                 if (hit.collider.gameObject)
                 {
-                    playerController.PlayerDamageFromGan();
                 }
             }
             }
