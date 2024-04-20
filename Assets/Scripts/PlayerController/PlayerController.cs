@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private  float rotationY;
 
     [SerializeField] private bool ActiveDrag;
-    [SerializeField] private bool ActiveMove;
+    [SerializeField] public bool ActiveMove;
 
     void Start()
     {
