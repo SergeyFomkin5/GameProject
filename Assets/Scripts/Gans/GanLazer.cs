@@ -29,6 +29,7 @@ public class GanLazer : MonoBehaviour
     void Update()
     {
         SystemGan();
+        
     }
     IEnumerator ShotEffect()
     {
@@ -43,7 +44,7 @@ public class GanLazer : MonoBehaviour
             var direction = TargetMax.position - TargetMin.position;
             ray = new Ray(TargetMin.position, direction);
             Physics.Raycast(ray, out hit);
-            
+            Debug.DrawLine(ray.origin, hit.point, Color.red);
 
             if (Input.GetKey(KeyCode.Mouse0) && Time.time > NextFire)
             {
@@ -58,8 +59,6 @@ public class GanLazer : MonoBehaviour
                 GanActiveFalse();
                 if (hit.collider.gameObject)
                 {
-                    var rb=hit.collider.gameObject.AddComponent<Rigidbody>();
-                    rb.AddForce(Vector3.forward * 100);
                 }
             }
             }

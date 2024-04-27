@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.layer==8)
         {
-            body.drag = 0;
+            body.drag = 1;
             ActiveDrag = false;
         }
     }
