@@ -7,6 +7,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventoryMenu;
     private bool MenuActive;
     public ItemSlot[] itemSlot;
+
     void Start()
     {
         
@@ -20,6 +21,7 @@ public class InventoryManager : MonoBehaviour
             InventoryMenu.SetActive(false);
             MenuActive = false;
             Time.timeScale = 1.0f;
+            
         }
         else if (Input.GetKeyDown(KeyCode.I) && !MenuActive)
         {
@@ -38,6 +40,15 @@ public class InventoryManager : MonoBehaviour
                 itemSlot[i].AddItem(ItemName, Quantity, sprite);
                 return;
             }
+        }
+    }
+
+    public void DeselectAllSlots()
+    {
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            itemSlot[i].SelectedShader.SetActive(false);
+            itemSlot[i].ThisItemSelected = false;
         }
     }
 }
