@@ -301,10 +301,14 @@ MonoBehaviour:
   Quantity: 0
   sprite: {fileID: 0}
   isFull: 0
+  ItemDescription: 
   QuantityText: {fileID: 7899771070852545846}
   ItemImage: {fileID: 8794254236743583607}
+  ItemDescriptionImage: {fileID: 0}
+  ItemDescriptionNameText: {fileID: 0}
+  ItemDescriptionText: {fileID: 0}
   SelectedShader: {fileID: 246708392630287778}
-  ThisItemHasBeenSelected: 0
+  ThisItemSelected: 0
 --- !u!1 &9003595973316800158
 GameObject:
   m_ObjectHideFlags: 0
