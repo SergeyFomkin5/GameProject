@@ -7,27 +7,41 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventoryMenu;
     private bool MenuActive;
     public ItemSlot[] itemSlot;
+    public GameObject Player;
+    PlayerController playerController;
+    public GameObject gancontroller;
+    float zero = 0f;
 
     void Start()
     {
-        
+        playerController = Player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I) && MenuActive)
+        if ((Input.GetKey(KeyCode.I) && MenuActive) && Time.time > zero)
         {
-            InventoryMenu.SetActive(false);
+            zero = Time.time + .2f;
+            gancontroller.SetActive(false);
+            playerController.enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
+            InventoryMenu.SetActive(true);
             MenuActive = false;
-            Time.timeScale = 1.0f;
             
         }
         else if (Input.GetKeyDown(KeyCode.I) && !MenuActive)
         {
-            InventoryMenu.SetActive(true);
+            
+            gancontroller.SetActive(true);
+            playerController.enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Time.timeScale = 1.0f;
+            InventoryMenu.SetActive(false);
             MenuActive = true;
-            Time.timeScale = 0f;
         }
     }
 
