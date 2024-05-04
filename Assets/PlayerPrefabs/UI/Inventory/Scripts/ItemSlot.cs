@@ -13,6 +13,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public Sprite sprite;
     public bool isFull;
     public string ItemDescription;
+    public Sprite EmptySprite;
+    [SerializeField] private int maxNumberOfItems;
 
     //======Item Slot======//
     [SerializeField] private TMP_Text QuantityText;
@@ -35,17 +37,36 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
     }
 
-    public  void AddItem(string ItemName, int Quantity, Sprite sprite, string ItemDescription)
+    public int AddItem(string ItemName, int Quantity, Sprite sprite, string ItemDescription)
     {
-        this.ItemName = ItemName;
-        this.Quantity = Quantity;
-        this.sprite = sprite;
-        this.ItemDescription = ItemDescription;
-        isFull = true;
+        //Check to see if the slot is akready full
+        if (isFull)
+        
+            return Quantity;
+        
 
-        QuantityText.text = Quantity.ToString();
-        QuantityText.enabled = true;
+        this.ItemName = ItemName;
+        this.sprite = sprite;
         ItemImage.sprite = sprite;
+        this.ItemDescription = ItemDescription;
+        this.Quantity += Quantity;
+        if (this.Quantity >= maxNumberOfItems)
+        {
+            QuantityText.text = maxNumberOfItems.ToString();
+            QuantityText.enabled = true;
+            isFull = true;
+
+            int extraItems = this.Quantity - maxNumberOfItems;
+            this.Quantity = maxNumberOfItems;
+            return extraItems;
+        }
+
+        QuantityText.text = this.Quantity.ToString();
+        QuantityText.enabled = true;
+
+        return 0;
+
+
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -61,8 +82,41 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    private void EmptySlot()
+    {
+        QuantityText.enabled = false;
+        ItemImage.sprite = EmptySprite;
+
+        ItemDescriptionNameText.text = "";
+        ItemDescriptionText.text = "";
+        ItemDescriptionImage.sprite = EmptySprite;
+    }
+
     public void OnRightClick()
     {
+        GameObject itemToDrop = new GameObject(ItemName);
+        Item newItem = itemToDrop.AddComponent<Item>();
+        newItem.Quantity = 1;
+        newItem.ItemName = ItemName;
+        newItem.sprite = sprite;
+        newItem.ItemDescription = ItemDescription;
+
+
+        SpriteRenderer sr = itemToDrop.AddComponent<SpriteRenderer>();
+        sr.sprite = sprite;
+        sr.sortingOrder = 5;
+        sr.sortingLayerName = "Ground";
+
+        itemToDrop.AddComponent<BoxCollider>();
+
+        itemToDrop.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(1, 0f, 0f);
+        itemToDrop.transform.localScale = new Vector3(.5f, .5f, .5f);
+
+        Quantity -= 1;
+        QuantityText.text = Quantity.ToString();
+        if (Quantity <= 0)
+            EmptySlot();
+        
 
     }
 
@@ -74,5 +128,10 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         ItemDescriptionNameText.text = ItemName;
         ItemDescriptionText.text = ItemDescription;
         ItemDescriptionImage.sprite = sprite;
+
+        if (ItemDescriptionImage.sprite == null) 
+        {
+            ItemDescriptionImage.sprite = EmptySprite;
+        }
     }
 }

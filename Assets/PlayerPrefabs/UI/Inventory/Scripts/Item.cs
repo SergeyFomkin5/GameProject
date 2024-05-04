@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] private string ItemName;
-    [SerializeField] private int Quantity;
-    [SerializeField] private Sprite sprite;
-    [SerializeField] private string ItemDescription;
+    [SerializeField] public string ItemName;
+    [SerializeField] public int Quantity;
+    [SerializeField] public Sprite sprite;
+    [SerializeField] public string ItemDescription;
     [TextArea] 
 
     private InventoryManager inventoryManager;
@@ -21,8 +21,14 @@ public class Item : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            inventoryManager.AddItem(ItemName, Quantity, sprite, ItemDescription);
-            Destroy(gameObject);
+            int leftOverItems = inventoryManager.AddItem(ItemName, Quantity, sprite, ItemDescription);
+            if (leftOverItems <= 0)
+                Destroy(gameObject);
+            
+            else
+                Quantity = leftOverItems;
+            
+            
         }
     }
 }
