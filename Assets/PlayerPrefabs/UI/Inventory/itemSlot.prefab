@@ -302,7 +302,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 8cb2cfa76a8cdf54989769d0dcfef789, type: 3}
   isFull: 0
   ItemDescription: 
-  EmptySprite: {fileID: 0}
+  EmptySprite: {fileID: 21300000, guid: 8cb2cfa76a8cdf54989769d0dcfef789, type: 3}
+  BackgroundImage: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   maxNumberOfItems: 10
   QuantityText: {fileID: 7899771070852545846}
   ItemImage: {fileID: 8794254236743583607}

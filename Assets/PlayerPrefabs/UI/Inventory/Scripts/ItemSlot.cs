@@ -41,9 +41,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
         //Check to see if the slot is akready full
         if (isFull)
-        
+
             return Quantity;
-        
+
 
         this.ItemName = ItemName;
         this.sprite = sprite;
@@ -82,56 +82,86 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void EmptySlot()
-    {
-        QuantityText.enabled = false;
-        ItemImage.sprite = EmptySprite;
 
-        ItemDescriptionNameText.text = "";
-        ItemDescriptionText.text = "";
-        ItemDescriptionImage.sprite = EmptySprite;
-    }
 
     public void OnRightClick()
     {
-        GameObject itemToDrop = new GameObject(ItemName);
-        Item newItem = itemToDrop.AddComponent<Item>();
-        newItem.Quantity = 1;
-        newItem.ItemName = ItemName;
-        newItem.sprite = sprite;
-        newItem.ItemDescription = ItemDescription;
+        if (Quantity > 0)
+        {
+            GameObject itemToDrop = new GameObject(ItemName);
+            Item newItem = itemToDrop.AddComponent<Item>();
+            newItem.Quantity = 1;
+            newItem.ItemName = ItemName;
+            newItem.sprite = sprite;
+            newItem.ItemDescription = ItemDescription;
 
 
-        SpriteRenderer sr = itemToDrop.AddComponent<SpriteRenderer>();
-        sr.sprite = sprite;
-        sr.sortingOrder = 5;
-        sr.sortingLayerName = "Ground";
+            SpriteRenderer sr = itemToDrop.AddComponent<SpriteRenderer>();
+            sr.sprite = sprite;
+            sr.sortingOrder = 5;
+            sr.sortingLayerName = "Ground";
 
-        itemToDrop.AddComponent<BoxCollider>();
+            itemToDrop.AddComponent<BoxCollider>();
 
-        itemToDrop.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(1, 0f, 0f);
-        itemToDrop.transform.localScale = new Vector3(.5f, .5f, .5f);
+            itemToDrop.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(1, 0f, 0f);
+            itemToDrop.transform.localScale = new Vector3(.5f, .5f, .5f);
 
-        Quantity -= 1;
-        QuantityText.text = Quantity.ToString();
-        if (Quantity <= 0)
-            EmptySlot();
-        
+            this.Quantity -= 1;
+            QuantityText.text = this.Quantity.ToString();
+            if (this.Quantity <= 0)
+            {
+                EmptySlot();
+            }
+
+        }
 
     }
 
     public void OnLeftClick()
     {
-        inventoryManager.DeselectAllSlots();
-        SelectedShader.SetActive(true);
-        ThisItemSelected = true;
-        ItemDescriptionNameText.text = ItemName;
-        ItemDescriptionText.text = ItemDescription;
-        ItemDescriptionImage.sprite = sprite;
-
-        if (ItemDescriptionImage.sprite == null) 
+        if (ThisItemSelected)
         {
-            ItemDescriptionImage.sprite = EmptySprite;
+            QuantityText.text = this.Quantity.ToString();
+            Quantity -= 1;
+            if (this.Quantity <= 0)
+            {
+                EmptySlot();
+                
+            }
         }
+        
+
+        else
+        {
+            inventoryManager.DeselectAllSlots();
+            SelectedShader.SetActive(true);
+            ThisItemSelected = true;
+            ItemDescriptionNameText.text = ItemName;
+            ItemDescriptionText.text = ItemDescription;
+            ItemDescriptionImage.sprite = sprite;
+
+            if (ItemDescriptionImage.sprite == null)
+            {
+                ItemDescriptionImage.sprite = EmptySprite;
+            }
+        }
+            
+        
+    }
+
+        
+    
+
+    private void EmptySlot()
+    {
+        QuantityText.enabled = false;
+
+        ItemImage.sprite = EmptySprite;
+
+        ItemDescriptionNameText.text = "";
+        ItemDescriptionText.text = "";
+        ItemDescriptionImage.sprite = EmptySprite;
+        
+        
     }
 }
