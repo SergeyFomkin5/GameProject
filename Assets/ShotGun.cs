@@ -1,30 +1,32 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class ShotGun : MonoBehaviour
 {
-    [SerializeField] private GameObject[] Players=new GameObject[2];
-    [SerializeField] private GameObject Cub;
+    [SerializeField] private Rigidbody _Bullet;
     [SerializeField] private Transform TargetMin;
     [SerializeField] private Transform TargetMax;
     [SerializeField] private Transform EndGan;
-    [SerializeField] private bool ActiveClone = false, OneOrTwo=true; 
+    [SerializeField] private bool OneOrTwo=true; 
     [SerializeField] private float NextFire;
+    [SerializeField] private float speedBullet;
+    Rigidbody bullet;
     RaycastHit hit;
     Ray ray;
     private void Update()
     {
-        if (ActiveClone==false&&Input.GetKey(KeyCode.Mouse1) && Time.time > NextFire) 
+        if (Input.GetKey(KeyCode.Mouse1) && Time.time > NextFire) 
         {
-            NextFire = Time.time + .0f; 
+            NextFire = Time.time + .3f; 
             Shoot();
-            ActiveClone = true;
         }
-        OneOrTwoPlayer();
+        Invoke("DestroyBullet", 1f+Time.deltaTime);
     }
     public void Shoot()
     {
         for (int i = 0; i < 13; i++)
         {
+            SpawnBullet();
             var direction = TargetMax.position - TargetMin.position + Vector3.forward * Random.Range(-3, 3) + Vector3.up * Random.Range(-3, 3);
             ray = new Ray(TargetMin.position, direction);
             Physics.Raycast(ray, out hit);
@@ -32,25 +34,15 @@ public class ShotGun : MonoBehaviour
             if (hit.collider.gameObject)
             {
             }
-        
         }
     }
-    void PlayerClone()
+    public void SpawnBullet()
     {
-        Instantiate(Cub, hit.point, Quaternion.identity);
-        Players[1] = Cub; 
+        bullet = Instantiate(_Bullet, EndGan.position + Vector3.forward * Random.Range(-0.2f, 0.2f) + Vector3.up * Random.Range(-0.2f, 0.2f), EndGan.localRotation);
+        bullet.AddForce(EndGan.forward * speedBullet * Random.Range(1, 6));
     }
-    void OneOrTwoPlayer()
+    public void DestroyBullet()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Players[0].SetActive(false);
-            Players[1].SetActive(true);
-        }
-        else
-        {
-            Players[0].SetActive(true);
-            Players[1].SetActive(false);
-        }
+        Destroy(GameObject.FindGameObjectWithTag(bullet.gameObject.tag), 0.1f);
     }
 }
