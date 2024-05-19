@@ -7,12 +7,13 @@ public class GanLazer : MonoBehaviour
     [SerializeField] Image GanShopBar;
     [SerializeField] bool ActiveGan=true;
 
+    [SerializeField] public int counter = 0;
     [SerializeField] private Transform TargetMin;
     [SerializeField] private Transform TargetMax;
     [SerializeField] private Transform EndGan;
     [SerializeField] private LineRenderer laser;
     [SerializeField] private float NextFire;
-    [SerializeField] private float Damage=0.2f;
+    [SerializeField] private float Damage=50;
     [SerializeField] private WaitForSeconds LaserTime = new WaitForSeconds(0.05f);
     private RaycastHit hit;
     private Ray ray;
@@ -56,10 +57,21 @@ public class GanLazer : MonoBehaviour
                 laser.SetPosition(0, EndGan.position);
                 laser.SetPosition(1, TargetMax.position);
                 GanActiveFalse();
-                if (hit.collider.gameObject)
+                if (hit.collider.gameObject.tag=="Enemy")
                 {
-                    var rb=hit.collider.gameObject.AddComponent<Rigidbody>();
-                    rb.AddForce(Vector3.forward * 100);
+                    
+                    var Enemy = hit.collider.gameObject;
+                    if (Enemy != null)
+                    {
+                        var hpEnemy = Enemy.GetComponent<EnemyHealth>();
+                        hpEnemy.DealDamageBody(20);
+                        if (hpEnemy.value <= 0)
+                        {
+                            counter++;
+                            hpEnemy.TextCounter(counter);
+                        }
+                    }
+
                 }
             }
             }
