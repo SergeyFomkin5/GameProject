@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEditorInternal;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class Score : MonoBehaviour
 {
+    [SerializeField] private TMP_Text ScoreGameOver;
     public TMP_Text ScoreText;
     public static Score instance;
 
@@ -24,6 +22,7 @@ public class Score : MonoBehaviour
     public void AddPoints()
     {
             score += 100;
-            ScoreText.text = score.ToString() + " Points";  
+            ScoreText.text = score.ToString() + " Points"; 
+            ScoreGameOver.text = score.ToString();
     }
 }

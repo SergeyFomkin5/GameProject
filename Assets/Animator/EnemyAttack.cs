@@ -1,38 +1,38 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyAttack: MonoBehaviour
 {
     private float time;
-    public float DamageZombie = 0.3f;
+    public float DamageEnemy = 30f;
     public Animator animator;
-    public GameObject PlayerHP;
-    HpBar PlayerHealth;
+    [SerializeField] private Image HpBarPlayer;
     private void Start()
     {
-        PlayerHealth = PlayerHP.GetComponent<HpBar>();
+        animator.SetBool("RunEnemy", true);
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            animator.SetTrigger("AttackZombie");
-
+            animator.SetBool("AttackEnemy", true);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            animator.SetTrigger("RunZombie");
+            animator.SetBool("RunEnemy", true);
+            animator.SetBool("AttackEnemy", false);
         }
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag != "Player")
         {
-            animator.SetTrigger("RunZombie");
+            animator.SetBool("RunEnemy" , true);
         }
-        if (other.gameObject.tag == "Player")
+        else if (other.gameObject.tag == "Player")
         {
             AttackPlayer();
         }
@@ -42,7 +42,8 @@ public class EnemyAttack: MonoBehaviour
         time += Time.deltaTime;
         if (time > 1)
         {
-            PlayerHealth.HpBarImage.fillAmount -=DamageZombie;
+            animator.SetBool("AttackEnemy", true);
+            HpBarPlayer.fillAmount -=(DamageEnemy/100);
             time = 0;
         }
 

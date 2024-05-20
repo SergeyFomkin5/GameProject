@@ -46,7 +46,7 @@ public class GanLazer : MonoBehaviour
             Physics.Raycast(ray, out hit);
             
 
-            if (Input.GetKey(KeyCode.Mouse0) && Time.time > NextFire)
+            if ((Input.GetKey(KeyCode.Mouse0) && !Input.GetKey(KeyCode.R)) && Time.time > NextFire)
             {
             SystemGanShop();
             NextFire = Time.time + .3f;

@@ -20,9 +20,9 @@ public class EnemyAi : MonoBehaviour
         _navMeshAgent.stoppingDistance = 0;
     }
     void Update()
-    {
-        NoticePlayerUpdate();
+    { 
         ChaseUpdate();
+        NoticePlayerUpdate();
         PatrolUpdate();
     }
     void PickNewPatrolPoint()
@@ -54,12 +54,6 @@ public class EnemyAi : MonoBehaviour
                 if (hit.collider.gameObject == player.gameObject)
                 {
                     _isPlayerNoticed = true;
-                    animator.SetBool("RunEnemy",true);
-                }
-                else
-                {
-                    _isPlayerNoticed = false;
-                    animator.SetBool("RunEnemy", false);
                 }
             }
         }

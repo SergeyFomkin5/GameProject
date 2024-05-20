@@ -2,7 +2,7 @@
 
 public class SpawnEnemy : MonoBehaviour
 {
-    [SerializeField] private GameObject[] Enemy;
+    [SerializeField] private GameObject Enemy;
     [SerializeField] private Transform[] SpawnPosition;
     [SerializeField] private float timer;
     [SerializeField] public float value=5;
@@ -16,10 +16,8 @@ public class SpawnEnemy : MonoBehaviour
         timer += Time.deltaTime;
         if(timer > value)
         {
-            
-            var Enemys = Enemy[Random.Range(0, 1)];
             var EnemysPosition = SpawnPosition[Random.Range(0, 10)];
-            Instantiate(Enemys, EnemysPosition.position, Quaternion.identity);
+            Instantiate(Enemy, EnemysPosition.position, Quaternion.identity);
             if (counterEnemys != null)
             {
                 if (counterEnemys.counter >= 2)

@@ -1,5 +1,4 @@
 ﻿ using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 
 public class ShotGun : MonoBehaviour
 {
@@ -16,9 +15,9 @@ public class ShotGun : MonoBehaviour
     Ray ray;
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse1) && Time.time > NextFire) 
+        if (Input.GetKey(KeyCode.Mouse1)&& Time.time > NextFire) 
         {
-            NextFire = Time.time + .3f; 
+            NextFire = Time.time + .5f; 
             Shoot();
         }
         Invoke("DestroyBullet", 1.5f+Time.deltaTime);
