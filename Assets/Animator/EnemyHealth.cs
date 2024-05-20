@@ -12,12 +12,8 @@ public class EnemyHealth : MonoBehaviour
     public NavMeshAgent agent;
     public CapsuleCollider capsuleCollider1, capsuleCollider2;
     public Animator animator;
-    public Score score;
+    
 
-    private void Start()
-    {
-        score = GetComponent<Score>();
-    }
     public void DealDamageBody(float damageBody)
     {
         value -= damageBody;
@@ -29,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
             capsuleCollider2.enabled = false;
             animator.SetTrigger("DeathEnemy");
             Destroy(gameObject, 10f);
-            score.AddPoints();
+            Score.instance.AddPoints();
         }
         
 

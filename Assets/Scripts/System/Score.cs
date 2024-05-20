@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
     public TMP_Text ScoreText;
-
+    public static Score instance;
 
     int score;
     void Start()
@@ -14,6 +16,10 @@ public class Score : MonoBehaviour
         ScoreText.text = score.ToString() + " Points";
     }
 
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void AddPoints()
     {
