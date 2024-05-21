@@ -15,6 +15,7 @@ public class GanLazer : MonoBehaviour
     [SerializeField] private float NextFire;
     [SerializeField] private float Damage=50;
     [SerializeField] private WaitForSeconds LaserTime = new WaitForSeconds(0.05f);
+    [SerializeField] private AudioSource ShootSound;
     private RaycastHit hit;
     private Ray ray;
 
@@ -24,6 +25,7 @@ public class GanLazer : MonoBehaviour
     private void Start()
     {
         playerController = Player.GetComponent<HpBar>();
+        ShootSound = GetComponent<AudioSource>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -33,6 +35,7 @@ public class GanLazer : MonoBehaviour
     }
     IEnumerator ShotEffect()
     {
+        ShootSound.Play();
         laser.enabled = true;
         yield return LaserTime;
         laser.enabled = false;

@@ -13,6 +13,7 @@ public class ShotGun : MonoBehaviour
     Rigidbody bullet;
     RaycastHit hit;
     Ray ray;
+
     private void Update()
     {
         if (Input.GetKey(KeyCode.Mouse1)&& Time.time > NextFire) 
