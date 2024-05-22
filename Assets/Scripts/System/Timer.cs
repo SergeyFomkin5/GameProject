@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using TMPro;
-using System.Numerics;
 
 public class Timer : MonoBehaviour
 {
@@ -39,7 +38,7 @@ public class Timer : MonoBehaviour
                 timeRemaining = 30;
             }
         }
-        if(counteTimerWave>=3)
+        if(counteTimerWave >= 3)
         {
             for(int i = 0; i < UiSprite.Length; i++)
             {

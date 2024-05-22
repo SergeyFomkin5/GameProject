@@ -4,8 +4,9 @@ using UnityEngine.UI;
 public class HpBar : MonoBehaviour
 {
     [SerializeField] private Image HpBarImage;
-    [SerializeField] private float DamagePlayer=0.2f;
-    [SerializeField] private Timer Timer;
+    [SerializeField] private float DamagePlayer = 0.2f;
+    [SerializeField] private Timer timer;
+
     public void PlayerDamageFromWater()
     {
        HpBarImage.fillAmount-=0.1f*Time.deltaTime;
@@ -16,9 +17,10 @@ public class HpBar : MonoBehaviour
     }
     void DeathPlayer()
     {
-        if (HpBarImage.fillAmount == 0)
+        if (HpBarImage.fillAmount <= 0)
         {
-            Timer.counteTimerWave=3;
+            timer.counteTimerWave = 3;
+            Debug.Log(timer.counteTimerWave);
         }
     }
 }
