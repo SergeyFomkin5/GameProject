@@ -16,7 +16,7 @@ public class HpBar : MonoBehaviour
     }
     void DeathPlayer()
     {
-        if (HpBarImage.fillAmount == 0)
+        if (HpBarImage.fillAmount <= 0)
         {
             Timer.counteTimerWave=3;
         }

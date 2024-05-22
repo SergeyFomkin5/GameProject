@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Audio.meta
 guid: 423e5bcde1e3fff48863d67505a40493
+========
+guid: 1600ff0648c662642b8dbf12ba822151
+>>>>>>>> fix:Assets/AnimatedCosmos.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
