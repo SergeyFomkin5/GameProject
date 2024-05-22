@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/PlayerPrefabs/Animations.meta
 guid: 0201225fbed570644bf616f1db6a966a
-========
-guid: 3e124fb5517debd4e838f93186327fab
->>>>>>>> fix:Assets/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
