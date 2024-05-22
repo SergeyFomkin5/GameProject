@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Menu.meta
 guid: 17fa6a410935ddd4c97073581735659a
+========
+guid: 7219c41a22d4e4267889845465547fdc
+>>>>>>>> cc5c80ff7ab6f77fb5a19a8c3afe263865614453:Assets/Samples/ProBuilder/4.5.2/High Definition Render Pipeline Support/Material.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
