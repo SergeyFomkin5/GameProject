@@ -23,20 +23,13 @@ public class EnemyAi : MonoBehaviour
     { 
         ChaseUpdate();
         NoticePlayerUpdate();
-        PatrolUpdate();
+
     }
     void PickNewPatrolPoint()
     {
-        _navMeshAgent.destination = patrolPoints[Random.Range(0, patrolPoints.Count)].position;
+        _navMeshAgent.destination = patrolPoints[0].position;
     }
-    void PatrolUpdate()
-    {
 
-        if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance && !_isPlayerNoticed)
-        {
-            PickNewPatrolPoint();
-        }
-    }
     void InitComponentLinks()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -55,12 +48,19 @@ public class EnemyAi : MonoBehaviour
                 {
                     _isPlayerNoticed = true;
                 }
+                else
+                {
+                    _isPlayerNoticed = false;
+                }
             }
         }
     }
     void ChaseUpdate()
     {
-        if (_isPlayerNoticed) _navMeshAgent.destination = player.transform.position;
+        if (_navMeshAgent != null)
+        {
+            if (_isPlayerNoticed) _navMeshAgent.destination = player.transform.position;
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
